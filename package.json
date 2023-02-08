@@ -1,0 +1,25 @@
+{
+  "name": "homework-cy",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aleksandar2512/Homework-Cy.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aleksandar2512/Homework-Cy/issues"
+  },
+  "homepage": "https://github.com/aleksandar2512/Homework-Cy#readme",
+  "dependencies": {
+    "pkg": "^5.8.0"
+  },
+  "devDependencies": {
+    "cypress": "^12.5.1"
+  }
+}
