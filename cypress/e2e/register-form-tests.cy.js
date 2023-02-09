@@ -134,3 +134,4 @@ describe("Register Form Tests", () => {
       cy.url().should("contain", "/register");
     })
   })
+  
