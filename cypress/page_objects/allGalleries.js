@@ -1,44 +1,39 @@
 class AllGalleries {
-    get allGalleriesPage() {
+    get allGalleriesPageLink() {
         return cy.get("a[href='/']");
     }
 
     get searchInput() {
-        return cy.get(".form-control");
+        return cy.get('[aria-label="Search..."]');
     }
 
     get filterButton() {
-        return cy.get("button");
+        return cy.contains("Filter");
     }
 
-    get myGalleries() {
+    get myGalleriesPage() {
         return cy.get("a[href='/my-galleries']");
     }
 
-    get createGallery() {
-        return cy.get("a[href='/create/]");
+    get createGalleryPage() {
+        return cy.get("a[href='/create]");
     }
 
     get loadMore() {
-        return cy.get(".btn.btn-custom");
+        return cy.contains("Load More");
     }
 
     get logout() {
-        return cy.get("a[role='button']")
+        return cy.contains("Logout");
     }
 
-    get openGalleryByTitle() {
-        return cy.get("a[href='/galleries/34']");
+    get navbar() {
+        return cy.get("#navbarTogglerDemo01");
     }
 
-    get openGalleryByAuthor() {
-        return cy.get("a[href='/authors/32']");
-    }
-
-    search(text) {
-        this.searchInput.type(text);
-        this.filterButton.click();
+    get title() {
+        return cy.contains("All Galleries");
     }
 }
 
-export const allGalleriesPage = new AllGalleries();
+export const allGalleriesPageLink = new AllGalleries();

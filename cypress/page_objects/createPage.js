@@ -1,5 +1,5 @@
 class CreateGallery {
-    get crateGalleryLink() {
+    get crateGalleryPageLink() {
         return cy.get('a[href="/create"]');
     }
 
@@ -7,28 +7,48 @@ class CreateGallery {
         return cy.get("#title");
     }
 
-    get descriptionsInput() {
+    get descriptionInput() {
         return cy.get("#description");
     }
 
-    get images() {
-        return cy.get("url");
+    get imagesInput() {
+        return cy.get('input[type="url"]');
     }
 
     get addImageButton() {
-        return cy.get("button");
+        return cy.contains("Add image");
     }
 
-    get subbmitButton() {
-        return cy.get("subbmit");
+    get submitButton() {
+        return cy.contains("Submit");
     }
 
-    create(title, descriptions, url) {
+    get cancelButton() {
+        return cy.contains("Cancel");
+    }
+
+    get createGalleryTitle() {
+        return cy.contains("Create Gallery")
+    }
+
+    get titleLabel() {
+        return cy.contains("Title:");
+    }
+
+    get descriptionLabel() {
+        return cy.contains("Descriptions:");
+    }
+
+    get imagesLabel() {
+        return cy.contains("Images:");
+    }
+
+    create(title, description, url) {
         this.titleInput.type(title);
-        this.descriptionsInput.type(descriptions);
+        this.descriptionInput.type(description);
         this.images.type(url);
-        this.subbmitButton.click();
+        this.submitButton.click();
     }
 }
 
-export const createGallery = new CreateGallery();
+export const createGalleryPageLink = new CreateGallery();
