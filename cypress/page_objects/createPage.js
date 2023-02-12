@@ -46,9 +46,9 @@ class CreateGallery {
     create(title, description, url) {
         this.titleInput.type(title);
         this.descriptionInput.type(description);
-        this.images.type(url);
+        this.imagesInput.type(url);
         this.submitButton.click();
     }
 }
 
-export const createGalleryPageLink = new CreateGallery();
+export const createGallery = new CreateGallery();

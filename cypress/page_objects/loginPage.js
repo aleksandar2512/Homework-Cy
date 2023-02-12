@@ -11,14 +11,14 @@ class LoginPage {
         return cy.get("#password");
     }
 
-    get subbmitButton() {
+    get submitButton() {
         return cy.get("button")
     }
 
     login(email, password) {
         this.emailInput.type(email);
         this.passwortInput.type(password);
-        this.subbmitButton.click();
+        this.submitButton.click();
     }
 }
 

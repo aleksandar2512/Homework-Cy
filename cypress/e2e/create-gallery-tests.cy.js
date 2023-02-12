@@ -1,25 +1,27 @@
 /// <reference types="Cypress" />
 
-import { createGallery } from "../page_objects/createPage";
+import { createGallery, createGalleryPageLink } from "../page_objects/createPage";
 import { loginPage } from "../page_objects/loginPage";
 
-let createData = {
-    title: "test-title",
-    descriptions: "test-descriptions",
-    url: "https://cdn.pixabay.com/photo/2016/03/21/23/25/link-1271843__480.png"
-}
-
 describe("Create Gallery tests", () => {
-    it("Log in first", () => {
-      cy.visit('/login')
-      loginPage.login("madeinzvornik@gmail.com", "Malimrav123");
-      cy.url().should("not.contain", '/login');
-
-})
-
-    it("Create a Gallery", () => {
-        createGallery.crateGalleryLink.click();
-        cy.url().should("contain", "/create");
-        createGallery.create(createData.title, createData.descriptions, createData.url);
+    let createGalleryData = {
+       title: "test title",
+       description: "test descripton",
+       url: "https://live.staticflickr.com/5334/7173684176_f55a5ddcac_n.jpg"
+    }
+    let loginData = {
+       email: "madeinzvornik@gmail.com",
+       password: "Malimrav123"
+    }
+    before("Visit App and click on Login page link", () => {
+       cy.visit("/login");
+       loginPage.loginLink.click();
+       loginPage.login(loginData.email, loginData.password);
+       cy.url().should("contain", "/login");
     })
-})
+
+    it("Create Gallery with a valid Data", () => {
+        cy.visit("/create");
+        createGallery.create(createGalleryData.title, createGalleryData.description, createGalleryData.url)
+    })
+});
