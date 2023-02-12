@@ -43,6 +43,18 @@ class CreateGallery {
         return cy.contains("Images:");
     }
 
+    get imagesCircleUp() {
+        return cy.get(".fas.fa-chevron-circle-up");
+    }
+
+    get imagesCircleDown() {
+        return cy.get(".fas.fa-chevron-circle-down");
+    }
+
+    get deleteImage() {
+        return cy.get(".fas.fa-trash")
+    }
+
     create(title, description, url) {
         this.titleInput.type(title);
         this.descriptionInput.type(description);

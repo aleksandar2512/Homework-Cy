@@ -8,6 +8,9 @@ describe("Create Gallery tests", () => {
        title: "test title",
        description: "test descripton",
        url: "https://live.staticflickr.com/5334/7173684176_f55a5ddcac_n.jpg",
+       url2: "https://upload.wikimedia.org/wikipedia/commons/e/e3/Hermitage_cat.jpeg",
+       pngImage: "https://toppng.com/uploads/preview/cat-png-transparent-cats-11563647803vsex8nq98w.png",
+       jepgImage: "https://upload.wikimedia.org/wikipedia/commons/e/e3/Hermitage_cat.jpeg",
        nonTitle: " ",
        nonDescription: " ",
        longDescription: "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt",
@@ -51,7 +54,7 @@ describe("Create Gallery tests", () => {
         cy.url().should("contain", "/create");
     })
 
-    it.only("Create a Gallery with Description more than 1000 characters", () => {
+    it("Create a Gallery with Description more than 1000 characters", () => {
         cy.visit("/create");
         createGallery.create(createGalleryData.title, createGalleryData.longDescription, createGalleryData.url)
         cy.url().should("contain", "/create");
@@ -60,15 +63,30 @@ describe("Create Gallery tests", () => {
     it("Create a Gallery without Images", () => {
         cy.visit("/create");
         createGallery.create(createGalleryData.title, createGalleryData.description, createGalleryData.nonImages)
+        cy.url().should("contain", "/create");
     })
 
     it("Create a Gallery with invalid URL extension", () => {
         cy.visit("/create");
         createGallery.create(createGalleryData.title, createGalleryData.description, createGalleryData.invalidExtension)
+        cy.url().should("contain", "/create");
     })
 
-    it("Create a Gallery with valid Data", () => {
+    it("Create a Gallery with valid Data: JPG format Image", () => {
         cy.visit("/create");
         createGallery.create(createGalleryData.title, createGalleryData.description, createGalleryData.url)
+        cy.url().should("not.contain", "/create");
+    })
+
+    it("Create a Gallery with valid Data: PNG format Image", () => {
+        cy.visit("/create");
+        createGallery.create(createGalleryData.title, createGalleryData.description, createGalleryData.pngImage)
+        cy.url().should("not.contain", "/create");
+    })
+
+    it("Create a Gallery with valid Data: JEPG format Image", () => {
+        cy.visit("/create");
+        createGallery.create(createGalleryData.title, createGalleryData.description, createGalleryData.jepgImage)
+        cy.url().should("not.contain", "/create");
     })
 });
