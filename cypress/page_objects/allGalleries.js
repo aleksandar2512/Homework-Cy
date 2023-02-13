@@ -4,7 +4,7 @@ class AllGalleries {
     }
 
     get searchInput() {
-        return cy.get('[aria-label="Search..."]');
+        return cy.get('input');
     }
 
     get filterButton() {
@@ -32,8 +32,22 @@ class AllGalleries {
     }
 
     get title() {
-        return cy.contains("All Galleries");
+        return cy.get("h1");
     }
+
+    get allGalleriesCatch() {
+        return cy.get(".grid").children();
+    }
+
+    get singleGallery() {
+        return cy.get(".cell").first();
+    }
+
+    search(searchTerm) {
+        this.searchInput.type(searchTerm);
+        this.filterButton.click();
+    }
+
 }
 
 export const allGalleriesPageLink = new AllGalleries();

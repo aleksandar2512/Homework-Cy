@@ -12,7 +12,15 @@ class LoginPage {
     }
 
     get submitButton() {
-        return cy.get("button")
+        return cy.get("button");
+    }
+    
+    get loginPageHeading() {
+        return cy.get("h1");
+    }
+
+    get errorMessage() {
+        return cy.get(".alert");
     }
 
     login(email, password) {

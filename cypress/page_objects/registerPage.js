@@ -35,7 +35,7 @@ class RegisterPage {
     registerWithValidData(firstName, lastName, email, password) {
         this.firstName.type(firstName);
         this.lastName.type(lastName);
-        this.emailInput.type("asfas@dsdgsg.com");
+        this.emailInput.type(email);
         this.passwordInput.type(password);
         this.passwordConfirmation.type(password);
         this.tosCheckbox.check();
