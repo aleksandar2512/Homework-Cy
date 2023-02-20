@@ -20,8 +20,20 @@ describe("Login Form Tests", () => {
           .and("have.text", "Please login");
     });
 
-    it("Login with invalid Email adress", () => {
+    it.only("Login with invalid Email adress", () => {
+      cy.intercept({
+        method: "POST",
+        url: "https://gallery-api.vivifyideas.com/api/auth/login"
+      }).as("unsuccessfulLogin")
+
       loginPage.login(credentials.invalidEmail, credentials.password);
+
+      cy.wait("@unsuccessfulLogin").then((intercetion) => {
+        console.log("INTERCEPTION", intercetion);
+        expect(intercetion.response.statusCode).eq(401);
+        expect(intercetion.response.statusMessage).eq("Unauthorized");
+      });
+
       cy.url().should("include", "/login");
       loginPage.errorMessage
           .should("be.visible")
@@ -31,7 +43,18 @@ describe("Login Form Tests", () => {
     })
 
     it("Try to Log in with valid Credentials", () => {
+      cy.intercept({
+        method: "POST",
+        url: "https://gallery-api.vivifyideas.com/api/auth/login"
+      }).as("successfulLogin")
+
       loginPage.login(credentials.email, credentials.password);
+
+      cy.wait("@successfulLogin").then((intercetion) => {
+        console.log("INTERCEPTION", intercetion);
+        expect(intercetion.response.statusCode).eq(200);
+      });
+
       cy.url().should("not.include", "/login");
     })
 

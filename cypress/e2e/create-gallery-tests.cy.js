@@ -24,11 +24,9 @@ describe("Create Gallery tests", () => {
        email: "madeinzvornik@gmail.com",
        password: "Malimrav123"
     }
+
     beforeEach("Visit App and click on Login page link", () => {
-       cy.visit("/login");
-       loginPage.loginLink.click();
-       loginPage.login(loginData.email, loginData.password);
-       cy.url().should("not.contain", "/login");
+       cy.loginViaBackend()
     })
     
     it("Load 'Create Gallery' page successfully", () => {
@@ -97,7 +95,7 @@ describe("Create Gallery tests", () => {
                              .and("have.length", 9);
     })
 
-    it.only("Test 'Image URL' input Pagination", () => {
+    it("Test 'Image URL' input Pagination", () => {
         cy.visit("/create");
         createGallery.imagesInput.should("be.visible").and("have.length", 1)
         createGallery.addImageButton.click();
@@ -188,12 +186,6 @@ describe("Create Gallery tests", () => {
     it("Create a Gallery without Description", () => {
         cy.visit("/create");
         createGallery.create(createGalleryData.title, createGalleryData.nonDescription, createGalleryData.url)
-        cy.url().should("not.contain", "/create");
-    })
-
-    it("Create a Gallery with valid Data: JPG format Image", () => {
-        cy.visit("/create");
-        createGallery.create(createGalleryData.title, createGalleryData.description, createGalleryData.url)
         cy.url().should("not.contain", "/create");
     })
 
